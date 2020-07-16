@@ -16,39 +16,24 @@ class App extends Component {
     ],
   };
 
-  // bound to name input field
-  handleNameChange = (event) => {
+  handleChangeFor = (event, propertyName) => {
     this.setState({
       newCreature: {
         ...this.state.newCreature,
-        name: event.target.value,
+        [propertyName]: event.target.value,
       }
     });
   }
-
-  // bound to origin input field
-  handleOriginChange = (event) => {
-    this.setState({
-      newCreature: {
-        ...this.state.newCreature,
-        origin: event.target.value,
-      }
-    });
-  }
-
-  // handleChangeFor = (event, propertyName) => {
-  //   this.setState({
-  //     newCreature: {
-  //       ...this.state.newCreature,
-  //       [propertyName]: event.target.value,
-  //     }
-  //   });
-  // }
 
   handleClick = () => {
     this.setState({
-      creatureList: [...this.state.creatureList, this.state.newCreature],      
-    });    
+      creatureList: [...this.state.creatureList, this.state.newCreature],
+      // clears out form fields: value={} must be defined on input
+      newCreature: {
+        name: '',
+        origin: '',
+      }
+    });
   }
 
   render() {
@@ -57,9 +42,19 @@ class App extends Component {
         <h1>Mythical Creatures of the World</h1>
 
         <h2>Add a Creature</h2>
-        <input placeholder="name" onChange={this.handleNameChange} />
-        <input placeholder="origin" onChange={this.handleOriginChange} />
-        <button onClick={this.handleClick}>Add Creature</button>
+        <div>
+          <input
+            value={this.state.newCreature.name}
+            placeholder="name"
+            onChange={(event) => this.handleChangeFor(event, 'name')}
+          />
+          <input
+            value={this.state.newCreature.origin}
+            placeholder="origin"
+            onChange={(event) => this.handleChangeFor(event, 'origin')}
+          />
+          <button onClick={this.handleClick}>Add Creature</button>
+        </div>
 
         {/* output of inputs above */}
 
@@ -69,13 +64,10 @@ class App extends Component {
 
         <h2>Creature List</h2>
         <ul>
-          {this.state.creatureList.map(creature => (
-            <li>{creature.name} originated in {creature.origin}</li>)
+          {this.state.creatureList.map((creature, index) => (
+            <li key={index}>{creature.name} originated in {creature.origin}</li>)
           )}
         </ul>
-        <pre>
-          {/* {JSON.stringify(this.state, null, 2)} */}
-        </pre>
       </main>
     );
   }
