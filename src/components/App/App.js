@@ -38,37 +38,43 @@ class App extends Component {
 
   render() {
     return (
-      <main>
-        <h1>Mythical Creatures of the World</h1>
+      <div>
+        <header className="appHd">
+          <h1>Mythical Creatures of the World</h1>
+        </header>
+        <main className="wrapper">
+          <div className="panel panel_connectedTop">
+            <h2 className="panel-hdg">Add a Creature</h2>
+            <input
+              value={this.state.newCreature.name}
+              placeholder="name"
+              onChange={(event) => this.handleChangeFor(event, 'name')}
+            />
+            <input
+              value={this.state.newCreature.origin}
+              placeholder="origin"
+              onChange={(event) => this.handleChangeFor(event, 'origin')}
+            />
+            <button onClick={this.handleClick}>Add Creature</button>
+            
+            <p className="panel-bottomMsg">
+              The {this.state.newCreature.name} originated in {this.state.newCreature.origin}.
+            </p>
+          </div>
 
-        <h2>Add a Creature</h2>
-        <div>
-          <input
-            value={this.state.newCreature.name}
-            placeholder="name"
-            onChange={(event) => this.handleChangeFor(event, 'name')}
-          />
-          <input
-            value={this.state.newCreature.origin}
-            placeholder="origin"
-            onChange={(event) => this.handleChangeFor(event, 'origin')}
-          />
-          <button onClick={this.handleClick}>Add Creature</button>
-        </div>
+          {/* output of inputs above */}
 
-        {/* output of inputs above */}
 
-        <p>
-          The {this.state.newCreature.name} originated in {this.state.newCreature.origin}.
-        </p>
-
-        <h2>Creature List</h2>
-        <ul>
-          {this.state.creatureList.map((creature, index) => (
-            <li key={index}>{creature.name} originated in {creature.origin}</li>)
-          )}
-        </ul>
-      </main>
+          <div className="panel">
+            <h2 className="panel-hdg">Creature List</h2>
+            <ul>
+              {this.state.creatureList.map((creature, index) => (
+                <li key={index}>{creature.name} originated in {creature.origin}</li>)
+              )}
+            </ul>
+          </div>
+        </main>
+      </div>
     );
   }
 }
