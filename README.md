@@ -6,8 +6,3 @@ Mythical Creature App with a list and form in components (uses props):
 - move list to a component
 - move form to a component
 - move individual list items to a component (optional exercise) 
-
-
-## NOTE
-
-Does not have clearing inputs or single handler method.
