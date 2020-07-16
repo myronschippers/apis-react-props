@@ -37,6 +37,10 @@ class App extends Component {
   }
 
   render() {
+    const displayCreatures = this.state.creatureList.map((creature, index) => {
+      return <li key={index}>{creature.name} originated in {creature.origin}</li>
+    });
+
     return (
       <div>
         <header className="appHd">
@@ -45,32 +49,32 @@ class App extends Component {
         <main className="wrapper">
           <div className="panel panel_connectedTop">
             <h2 className="panel-hdg">Add a Creature</h2>
+
             <input
+              className="field"
               value={this.state.newCreature.name}
               placeholder="name"
               onChange={(event) => this.handleChangeFor(event, 'name')}
             />
             <input
+              className="field"
               value={this.state.newCreature.origin}
               placeholder="origin"
               onChange={(event) => this.handleChangeFor(event, 'origin')}
             />
-            <button onClick={this.handleClick}>Add Creature</button>
-            
+            <button className="btn" onClick={this.handleClick}>Add Creature</button>
+
+            {/* output of inputs above */}
             <p className="panel-bottomMsg">
               The {this.state.newCreature.name} originated in {this.state.newCreature.origin}.
             </p>
           </div>
 
-          {/* output of inputs above */}
-
-
           <div className="panel">
             <h2 className="panel-hdg">Creature List</h2>
+
             <ul>
-              {this.state.creatureList.map((creature, index) => (
-                <li key={index}>{creature.name} originated in {creature.origin}</li>)
-              )}
+              {displayCreatures}
             </ul>
           </div>
         </main>
