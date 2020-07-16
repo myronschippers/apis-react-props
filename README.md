@@ -1,4 +1,4 @@
-# React Props Starter
+# React Props
 
 Mythical Creature App with a list and form in components (uses props):
 
